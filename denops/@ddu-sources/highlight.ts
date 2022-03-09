@@ -4,8 +4,8 @@ import {
   Actions,
   BaseSource,
   Item,
-} from "https://deno.land/x/ddu_vim@v0.12.2/types.ts#^";
-import { Denops, fn } from "https://deno.land/x/ddu_vim@v0.12.2/deps.ts#^";
+} from "https://deno.land/x/ddu_vim@v1.2.0/types.ts";
+import { Denops, fn } from "https://deno.land/x/ddu_vim@v1.2.0/deps.ts";
 
 type Params = Record<never, never>;
 type ActionData = { command: string };
