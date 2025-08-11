@@ -1,19 +1,19 @@
 import {
-  ActionArguments,
+  type ActionArguments,
   ActionFlags,
-  Actions,
-  BaseSource,
-  Item,
-} from "https://deno.land/x/ddu_vim@v2.8.4/types.ts";
-import { Denops, fn } from "https://deno.land/x/ddu_vim@v2.8.4/deps.ts";
+  type Item,
+} from "jsr:@shougo/ddu-vim@~10.4.0/types";
+import type { Denops } from "jsr:@denops/std@7.6.0";
+import * as fn from "jsr:@denops/std@7.6.0/function";
+import { BaseSource } from "jsr:@shougo/ddu-vim@~10.4.0/source";
 
 type Params = Record<never, never>;
 type ActionData = { command: string };
 
 export class Source extends BaseSource<Params> {
-  kind = "highlight";
+  override kind = "highlight";
 
-  gather(args: {
+  override gather(args: {
     denops: Denops;
     sourceParams: Params;
   }): ReadableStream<Item<ActionData>[]> {
@@ -58,7 +58,7 @@ export class Source extends BaseSource<Params> {
     });
   }
 
-  actions: Actions<Params> = {
+  override actions = {
     edit: async ({ denops, items }: ActionArguments<Params>) => {
       const action = items[0]?.action as ActionData;
       await fn.feedkeys(denops, `:${action.command}`, "n");
